@@ -1,0 +1,20 @@
+name: Self hosted runner
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    self-hosted-runner:
+        runs-on: self-hosted
+        steps:
+            - name: Self hosted runner info
+              run: |
+                echo "Self hosted runner info"
+                hostname
+                whoami
+                mkdir -p create-file-test
+                cd create-file-test
+                echo "this file is created by github actions runner" > test-file.txt
+                cat test-file.txt
