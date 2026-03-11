@@ -17,11 +17,13 @@ jobs:
             ENVIRONMENT: staging
 
         steps:
-            - name: Check environment variables
+            - name: Check & print environment variables
+              env:
+                VERSION: 1.5.9
               run: |
                 echo "App name: $APP_NAME"
                 echo "Environment: $ENVIRONMENT"
                 echo "Version: $VERSION"
                 echo "Commit SHA: ${{ github.sha }}"
                 echo "Triggered by: ${{ github.actor }}"
-                
+
