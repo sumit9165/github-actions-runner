@@ -1,9 +1,7 @@
 name: Self hosted runner
 
 on:
-    push:
-        branches:
-            - main
+    workflow_dispatch:
 
 jobs:
     self-hosted-runner:
@@ -18,3 +16,5 @@ jobs:
                 cd create-file-test
                 echo "this file is created by github actions runner" > test-file.txt
                 cat test-file.txt
+                cd ..
+                rm -rf create-file-test
