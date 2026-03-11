@@ -1,9 +1,6 @@
 name: Environment variables
 
 on: 
-    push:
-        branches:
-            - main
     workflow_dispatch:
 
 env:
