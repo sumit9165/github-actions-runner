@@ -1,0 +1,27 @@
+name: Environment variables
+
+on: 
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+env:
+    APP_NAME: myapp
+
+jobs:
+    env_vars:
+        runs-on: ubuntu-latest
+
+        env:
+            ENVIRONMENT: staging
+
+        steps:
+            - name: Check environment variables
+              run: |
+                echo "App name: $APP_NAME"
+                echo "Environment: $ENVIRONMENT"
+                echo "Version: $VERSION"
+                echo "Commit SHA: ${{ github.sha }}"
+                echo "Triggered by: ${{ github.actor }}"
+                
