@@ -1,4 +1,4 @@
-name: Conditionals Demo
+name: Conditionals 
 
 on:
   push:
@@ -29,4 +29,3 @@ jobs:
       - name: Step that runs only if previous step failed
         if: ${{ failure() }}
         run: echo "A previous step failed"
-        
