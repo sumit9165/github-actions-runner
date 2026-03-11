@@ -1,0 +1,24 @@
+name: Artifact Test
+
+on:
+    workflow_dispatch:
+
+jobs:
+    artifact-test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Generate report file
+              run: |
+                mkdir reports
+                echo "This is a test file" > reports/test-report.txt
+                echo "Report generated at: $(date)" >> reports/test-report.txt
+                echo "Workflow executed in GitHub Actions runner: $RUNNER_NAME" >> reports/test-report.txt
+
+            - name: Upload artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: test-report
+                path: reports/test-report.txt
