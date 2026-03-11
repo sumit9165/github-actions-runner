@@ -31,4 +31,4 @@ jobs:
             - name: display artifact content
               run: |
                 echo "Content of the downloaded artifact:"
-                cat my-artifact/artifact.txt
+                cat artifact.txt
