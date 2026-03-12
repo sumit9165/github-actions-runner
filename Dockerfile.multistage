@@ -1,0 +1,33 @@
+FROM python:3.11 AS builder
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt --target /app/venv
+
+COPY . .
+
+##################### Stag -2 #################
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y libmariadb3 && rm -rf /var/lib/apt/lists/*
+
+RUN groupadd -r vishal2 && useradd -r -g vishal2 vishal 
+
+COPY --from=builder /app/app.py /app/app.py
+
+COPY --from=builder /app/venv /app/venv
+
+COPY --from=builder /app/templates /app/templates
+
+RUN chown vishal:vishal2 /app/app.py
+
+ENV PYTHONPATH=/app/venv
+
+USER vishal
+
+CMD ["python","app.py"]
+
