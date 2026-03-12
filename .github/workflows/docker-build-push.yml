@@ -21,15 +21,15 @@ jobs:
                 password: ${{ secrets.DOCKER_TOKEN }}
 
             - name: Build docker image
-              run: docker build -t {{ secrets.DOCKER_USERNAME }}/github-actions-runner:latest .
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/github-actions-runner:latest .
 
             - name: Push docker image
               if: github.ref == 'refs/heads/main'
-              run: docker push {{ secrets.DOCKER_USERNAME }}/github-actions-runner:latest
+              run: docker push ${{ secrets.DOCKER_USERNAME }}/github-actions-runner:latest
 
             - name: Build docker image with SHA tag
-              run: docker build -t {{ secrets.DOCKER_USERNAME }}/github-actions-runner:${{ github.sha }} .
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/github-actions-runner:${{ github.sha }} .
 
             - name: Push docker image with SHA tag
               if: github.ref == 'refs/heads/main'
-              run: docker push {{ secrets.DOCKER_USERNAME }}/github-actions-runner:${{ github.sha }}
+              run: docker push ${{ secrets.DOCKER_USERNAME }}/github-actions-runner:${{ github.sha }}
